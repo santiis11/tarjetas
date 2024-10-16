@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta del 15/10/2024</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .heart {
+            color: rgb(87, 200, 17);
+            font-size: 50px;
+            margin: 20px 0;
+            animation: pulse 1s infinite;
+        }
+        .titulo {
+            font-size: 2em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        #mensaje {
+            font-size: 1.2em;
+            margin-top: 20px;
+            min-height: 100px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #9bff69;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5cc50b;
+        }
+    </style>
+    <script>
+        // Función para escribir texto con efecto de máquina de escribir
+        function escribirTexto(texto, elementoId, velocidad, callback) {
+            let i = 0;
+            document.getElementById(elementoId).innerHTML = ""; // Limpiar antes de empezar a escribir
+            function escribirCaracter() {
+                if (i < texto.length) {
+                    document.getElementById(elementoId).innerHTML += texto.charAt(i);
+                    i++;
+                    setTimeout(escribirCaracter, velocidad);
+                } else if (callback) {
+                    callback(); // Llama a la función de callback al finalizar
+                }
+            }
+            escribirCaracter();
+        }
+
+        // Función que se ejecuta al cargar la página
+        function iniciarTarjeta() {
+            escribirTexto("***********************************", "titulo", 30);
+            setTimeout(() => {
+                escribirTexto("*      Tarjeta del 15/10/2024    *", "titulo", 30);
+            }, 1000);
+            setTimeout(() => {
+                escribirTexto("***********************************", "titulo", 30);
+            }, 2000);
+
+            setTimeout(() => {
+                document.getElementById("corazon").innerHTML = "♥♥♥";
+            }, 3000);
+
+            setTimeout(() => {
+                escribirTexto("Hola Ariii!", "mensaje", 100);
+            }, 4000);
+
+            setTimeout(() => {
+                escribirTexto("Si usted me diera un poco de azúcar, endulzaría mi café", "mensaje", 100, () => {
+                    // Después de mostrar el mensaje del café, muestra el siguiente
+                    setTimeout(() => {
+                        escribirTexto("Si usted me diera un poco de usted, endulzaría mi vida. -Mario Benedetti.", "mensaje", 100);
+                    }, 2000); // Pausa de 2 segundos antes de mostrar el siguiente mensaje
+                });
+            }, 7000);
+        }
+
+        function darLike() {
+            alert("Te quiero mucho😊");
+        }
+
+        window.onload = iniciarTarjeta;
+    </script>
+</head>
+<body>
+    <div class="titulo" id="titulo"></div>
+    <div class="heart" id="corazon"></div>
+    <div id="mensaje"></div>
+    <button onclick="darLike()">Si te gusto, da click</button>
+    <div class="footer">
+        <p>Presiona F5 para reiniciar la tarjeta.</p>
+    </div>
+</body>
+</html>
